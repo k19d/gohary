@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المـنصة الجـوهرية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 12px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* شاشة الدخول المحسنة */
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo-large {
+            margin-bottom: 25px;
+        }
+        
+        .logo-large img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+        }
+        
+        .login-card h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .login-card p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+        
+        .login-card input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .login-card input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .login-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            color: #ffeb3b;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .purchase-code {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .purchase-code a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .purchase-code a:hover {
+            color: #ffeb3b;
+        }
+        
+        /* المنصة الرئيسية */
+        .platform {
+            display: none;
+        }
+        
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        nav {
+            background: var(--secondary-color);
+            padding: 12px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .nav-links li {
+            margin-left: 0;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 25px;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .video-card {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            transition: var(--transition);
+        }
+        
+        .video-card:hover .play-icon {
+            background: var(--accent-color);
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+            font-size: 18px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal-body {
+            padding: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .widget-title {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .exam-card, .resource-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .exam-card:hover, .resource-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .exam-title, .resource-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .exam-info, .resource-info {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .teacher-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .teacher-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .teacher-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        
+        .teacher-details p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .footer-info p {
+            margin-bottom: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* صفحة شراء الكود */
+        .purchase-page {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+        }
+        
+        .purchase-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .purchase-container h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .purchase-container p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .phone-link {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .phone-link:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+        
+        .phone-input {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .phone-input input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: none;
+        }
+        
+        .submit-btn:hover {
+            background: #219653;
+            transform: translateY(-3px);
+        }
+        
+        .success-message {
+            display: none;
+            background: rgba(39, 174, 96, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid var(--success-color);
+        }
+        
+        .access-code {
+            font-size: 22px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+        
+        .back-to-login {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+        
+        .back-to-login:hover {
+            color: #ffeb3b;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة الدخول -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="logo-large">
+                <img src="gohary.png" alt="دكتور الجوهري">
+            </div>
+            <h2>المـنصة الجـوهرية</h2>
+            <p>أدخل اسمك ورمز الدخول للوصول إلى المحتوى التعليمي المتكامل</p>
+            
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="userName" placeholder="اسمك الكامل">
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="accessCode" placeholder="رمز الدخول">
+            </div>
+            
+            <button class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i>
+                دخول إلى المنصة
+            </button>
+            
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                رمز الدخول غير صحيح. يرجى المحاولة مرة أخرى.
+            </div>
+            
+            <div class="purchase-code">
+                <a href="#" id="purchaseLink">
+                    <i class="fas fa-shopping-cart"></i>
+                    شراء كود الدخول
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- المنصة الرئيسية -->
+    <div class="platform" id="platform">
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <img src="gohary.png" alt="دكتور الجوهري">
+                    <h1>المـنصة الجـوهرية</h1>
+                </div>
+                <div class="user-info">
+                    <span id="welcomeMessage">مرحباً</span>
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="صورة المستخدم">
+                </div>
+            </div>
+        </header>
+        
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#" class="active" data-section="videos">
+                        <i class="fas fa-play-circle"></i>
+                        الفيديوهات التعليمية
+                    </a></li>
+                    <li><a href="#" data-section="exams">
+                        <i class="fas fa-file-alt"></i>
+                        الامتحانات
+                    </a></li>
+                    <li><a href="#" data-section="resources">
+                        <i class="fas fa-book"></i>
+                        الشوامل والمراجعات
+                    </a></li>
+                    <li><a href="#" data-section="about">
+                        <i class="fas fa-user-graduate"></i>
+                        عن الدكتور
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container main-content">
+            <div class="content-area">
+                <!-- قسم الفيديوهات -->
+                <div class="content-section active" id="videos-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-play-circle"></i>
+                        الفيديوهات التعليمية
+                    </h2>
+                    <div class="videos-grid">
+                        <!-- فيديو 1 -->
+                        <div class="video-card" data-video="h6-KJWdF18A" data-duration="11:50:00">
+                            <div class="video-thumbnail">
+                                <img src="https://img.youtube.com/vi/h6-KJWdF18A/maxresdefault.jpg" alt="كبسولة الأحياء">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">كبسولة الأحياء ثلثي المنهج</div>
+                                <div class="video-meta">
+                                    <span><i class="far fa-clock"></i> 11:50:00</span>
+                                    <span><i class="far fa-calendar"></i> 15 اغسطس 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- فيديو 2 -->
+                        <div class="video-card" data-video="EI-Kfj3MmTg" data-duration="52:15">
+                            <div class="video-thumbnail">
+                                <img src="https://img.youtube.com/vi/EI-Kfj3MmTg/maxresdefault.jpg" alt="مراجعة الشهر الأول">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">مراجعة الشهر الأول كاملاً</div>
+                                <div class="video-meta">
+                                    <span><i class="far fa-clock"></i> 5:00:00</span>
+                                    <span><i class="far fa-calendar"></i> 5 أبريل 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- فيديو 3 -->
+                        <div class="video-card" data-video="sRExmYUUlJM" data-duration="38:42">
+                            <div class="video-thumbnail">
+                                <img src="https://img.youtube.com/vi/sRExmYUUlJM/maxresdefault.jpg" alt="كيف تحافظ على اجتهادك">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">كيف تحافظ على اجتهادك طوال العام</div>
+                                <div class="video-meta">
+                                    <span><i class="far fa-clock"></i> 38:42</span>
+                                    <span><i class="far fa-calendar"></i> 20 فبراير 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قسم الامتحانات -->
+                <div class="content-section" id="exams-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-alt"></i>
+                        الامتحانات والتقييمات
+                    </h2>
+                    <div class="exam-card">
+                        <div class="exam-title">امتحان الفصل الأول - الأحياء</div>
+                        <div class="exam-info">30 سؤال | زمن الامتحان: 60 دقيقة</div>
+                    </div>
+                    <div class="exam-card">
+                        <div class="exam-title">اختبار الشهر الأول - الأحياء</div>
+                        <div class="exam-info">20 سؤال | زمن الامتحان: 45 دقيقة</div>
+                    </div>
+                    <div class="exam-card">
+                        <div class="exam-title">امتحان تجريبي شامل</div>
+                        <div class="exam-info">50 سؤال | زمن الامتحان: 120 دقيقة</div>
+                    </div>
+                    <div class="exam-card">
+                        <div class="exam-title">اختبار تقييمي على الوحدة الأولى</div>
+                        <div class="exam-info">15 سؤال | زمن الامتحان: 30 دقيقة</div>
+                    </div>
+                </div>
+                
+                <!-- قسم الشوامل والمراجعات -->
+                <div class="content-section" id="resources-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-book"></i>
+                        الشوامل والمراجعات
+                    </h2>
+                    <div class="resource-card">
+                        <div class="resource-title">ملخص منهج الأحياء - الجزء الأول</div>
+                        <div class="resource-info">PDF | 25 صفحة | تم التحديث: 10 اغسطس 2025</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">أسئلة متوقعة لامتحان نهاية الفصل</div>
+                        <div class="resource-info">PDF | 15 صفحة | تم التحديث: 5 أبريل 2025</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">قاموس المصطلحات العلمية في الأحياء</div>
+                        <div class="resource-info">PDF | 30 صفحة | تم التحديث: 15 فبراير 2025</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">مراجعة شاملة للفصل الدراسي الأول</div>
+                        <div class="resource-info">PDF | 40 صفحة | تم التحديث: 1 مايو 2025</div>
+                    </div>
+                </div>
+                
+                <!-- قسم عن الدكتور -->
+                <div class="content-section" id="about-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-graduate"></i>
+                        عن الدكتور الجوهري
+                    </h2>
+                    <div class="teacher-profile">
+                        <img src="gohary.png" alt="دكتور الجوهري" class="teacher-img">
+                        <div class="teacher-details">
+                            <h3>د. أحمد الجوهري</h3>
+                            <p>مدرس مادة الأحياء بمدرسة النخبة الثانوية</p>
+                            <p>خبرة تدريس تزيد عن 15 عاماً في مجال التعليم الثانوي</p>
+                            <p>متخصص في تبسيط المناهج العلمية وتقديمها بطريقة مبتكرة</p>
+                        </div>
+                    </div>
+                    <p>يهدف الدكتور الجوهري إلى تقديم تعليم متميز في مادة الأحياء، مع التركيز على الفهم العميق للمفاهيم العلمية بدلاً من الحفظ. يتميز أسلوبه بالوضوح والبساطة، مما يساعد الطلاب على استيعاب المادة العلمية بشكل أفضل.</p>
+                    
+                    <div class="stats" style="margin-top: 30px;">
+                        <div class="stat-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">سنوات خبرة</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">طالب نجحوا معه</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">معدل النجاح</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">فيديو تعليمي</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">
+                        <i class="fas fa-chart-line"></i>
+                        إحصائيات الطالب
+                    </h3>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">فيديو شاهدتها</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">85%</div>
+                            <div class="stat-label">معدل النجاح</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">امتحانات أجرتها</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">ساعات دراسة</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">
+                        <i class="fas fa-bullhorn"></i>
+                        آخر الإعلانات
+                    </h3>
+                    <div class="resource-card">
+                        <div class="resource-title">محاضرة مباشرة يوم الخميس</div>
+                        <div class="resource-info">الخميس القادم الساعة 7 مساءً</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">موعد امتحان الشهر الثاني</div>
+                        <div class="resource-info">سيتم الإعلان عنه قريباً</div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-title">ورشة عمل عن تقنيات المذاكرة</div>
+                        <div class="resource-info">الأسبوع القادم - مجانية</div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">
+                        <i class="fas fa-fire"></i>
+                        الفيديوهات الأكثر مشاهدة
+                    </h3>
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://img.youtube.com/vi/h6-KJWdF18A/maxresdefault.jpg" alt="كبسولة الأحياء">
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">كبسولة الأحياء ثلثي المنهج</div>
+                            <div class="video-meta">
+                                <span><i class="far fa-eye"></i> 1,245 مشاهدة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://img.youtube.com/vi/EI-Kfj3MmTg/maxresdefault.jpg" alt="مراجعة الشهر الأول">
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">مراجعة الشهر الأول كاملاً</div>
+                            <div class="video-meta">
+                                <span><i class="far fa-eye"></i> 987 مشاهدة</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="gohary.png" alt="دكتور الجوهري">
+                        <div>
+                            <h3>المـنصة الجـوهرية</h3>
+                            <p>تعليم متميز في مادة الأحياء</p>
+                        </div>
+                    </div>
+                    <div class="footer-info">
+                        <p>للدعم الفني: support@dralgohary.com</p>
+                        <p>هاتف: 0المـنصة الجـوهرية789</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <p style="margin-top: 20px;">© 2025 المـنصة الجـوهرية. جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- نافذة عرض الفيديو -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">عرض الفيديو</h3>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <iframe id="videoFrame" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة شراء الكود -->
+    <div class="purchase-page" id="purchasePage">
+        <div class="purchase-container">
+            <h2>أسـعار الأكواد</h2>
+            <p>شـهر أكتوبر فقط 200ج.م بدلا من 250ج.م /  شهر أكتوبر و نوفمبر و ديسمبر 500ج.م بدلا من 800ج.م / التـرم كاملا 1999ج.م بدلا من 2500ج.م</p>
+            
+            <a href="https://wa.me/" class="phone-link" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                01234567891
+            </a>
+            
+            <p>تاريخ عمل الكود يبدا عند ضغط علي كلمه تسجيل الدخول</p>
+            
+            <div class="phone-input" id="phoneInput">
+                <input type="tel" id="phoneNumber" placeholder="رقم الهاتف">
+            </div>
+            
+            <button class="submit-btn" id="submitPhone">إرسال</button>
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <p>رمز دخولك هو  #FFHUDT6O3jrw0E9NPo7eM</p>
+            </div>
+            
+            <a href="#" class="back-to-login" id="backToLogin">
+                <i class="fas fa-arrow-right"></i>
+                العودة إلى صفحة الدخول
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // عناصر DOM
+        const loginScreen = document.getElementById('loginScreen');
+        const platform = document.getElementById('platform');
+        const purchasePage = document.getElementById('purchasePage');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const accessCodeInput = document.getElementById('accessCode');
+        const userNameInput = document.getElementById('userName');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const purchaseLink = document.getElementById('purchaseLink');
+        const backToLogin = document.getElementById('backToLogin');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const contentSections = document.querySelectorAll('.content-section');
+        const videoCards = document.querySelectorAll('.video-card');
+        const videoModal = document.getElementById('videoModal');
+        const videoFrame = document.getElementById('videoFrame');
+        const closeModal = document.getElementById('closeModal');
+        const phoneInput = document.getElementById('phoneInput');
+        const submitPhone = document.getElementById('submitPhone');
+        const successMessage = document.getElementById('successMessage');
+        
+        // رمز الدخول الصحيح
+        const correctCode = "#FFHUDT6O3jrw0E9NPo7eM";
+        
+        // التحقق من وجود اسم مستخدم محفوظ
+        window.addEventListener('load', function() {
+            const savedUserName = localStorage.getItem('userName');
+            if (savedUserName) {
+                userNameInput.value = savedUserName;
+            }
+        });
+        
+        // تسجيل الدخول
+        loginBtn.addEventListener('click', function() {
+            const enteredCode = accessCodeInput.value;
+            const userName = userNameInput.value.trim();
+            
+            if (!userName) {
+                errorMessage.textContent = "يرجى إدخال اسمك الكامل";
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            if (enteredCode === correctCode) {
+                // حفظ اسم المستخدم
+                localStorage.setItem('userName', userName);
+                
+                // عرض رسالة الترحيب
+                welcomeMessage.textContent = `مرحباً ${userName}`;
+                
+                // الانتقال إلى المنصة
+                loginScreen.style.display = 'none';
+                platform.style.display = 'block';
+                errorMessage.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+        
+        // الانتقال إلى صفحة شراء الكود
+        purchaseLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginScreen.style.display = 'none';
+            purchasePage.style.display = 'block';
+        });
+        
+        // العودة إلى صفحة الدخول
+        backToLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            purchasePage.style.display = 'none';
+            loginScreen.style.display = 'block';
+        });
+        
+        // التنقل بين أقسام المنصة
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // إزالة النشاط من جميع الروابط
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // إضافة النشاط للرابط المختار
+                this.classList.add('active');
+                
+                // إخفاء جميع الأقسام
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // إظهار القسم المختار
+                const sectionId = this.getAttribute('data-section') + '-section';
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+        
+        // فتح الفيديو في نافذة منبثقة
+        videoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video');
+                const videoTitle = this.querySelector('.video-title').textContent;
+                
+                videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById('modalTitle').textContent = videoTitle;
+                videoModal.style.display = 'flex';
+            });
+        });
+        
+        // إغلاق نافذة الفيديو
+        closeModal.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            videoFrame.src = '';
+        });
+        
+        // إغلاق النافذة عند النقر خارجها
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.style.display = 'none';
+                videoFrame.src = '';
+            }
+        });
+        
+        // إظهار حقل إدخال رقم الهاتف
+        document.querySelector('.phone-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            phoneInput.style.display = 'block';
+            submitPhone.style.display = 'block';
+        });
+        
+        // إرسال رقم الهاتف
+        submitPhone.addEventListener('click', function() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            if (phoneNumber) {
+                successMessage.style.display = 'block';
+                phoneInput.style.display = 'none';
+                submitPhone.style.display = 'none';
+            }
+        });
+        
+        // السماح بالدخول باستخدام زر Enter
+        accessCodeInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+        
+        userNameInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
