@@ -1146,11 +1146,10 @@
         
         .notification-item {
             padding: 15px 20px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid var(--light-color);
             display: flex;
             gap: 15px;
             transition: var(--transition);
-            cursor: pointer;
         }
         
         .notification-item:hover {
@@ -1167,24 +1166,23 @@
             justify-content: center;
             color: var(--primary-color);
             font-size: 18px;
-            flex-shrink: 0;
         }
         
         .notification-content h4 {
             margin-bottom: 5px;
+            font-size: 16px;
             color: var(--dark-color);
-            font-size: 15px;
         }
         
         .notification-content p {
+            font-size: 14px;
             color: var(--text-light);
-            font-size: 13px;
+            margin-bottom: 5px;
         }
         
         .notification-time {
             font-size: 12px;
             color: var(--text-light);
-            margin-top: 5px;
         }
         
         .overlay {
@@ -1202,7 +1200,7 @@
             display: block;
         }
         
-        /* تصميم متجاوب */
+        /* التجاوب مع الشاشات المختلفة */
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr 300px;
@@ -1215,14 +1213,14 @@
             }
             
             .sidebar {
-                grid-column: 1;
-                grid-template-columns: repeat(2, 1fr);
+                order: -1;
                 display: grid;
-                gap: 25px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
             
-            .videos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            .teacher-profile {
+                grid-column: 1 / -1;
             }
         }
         
@@ -1238,22 +1236,12 @@
                 justify-content: center;
             }
             
-            .nav-links a {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-            
-            .sidebar {
-                grid-template-columns: 1fr;
-            }
-            
             .videos-grid {
                 grid-template-columns: 1fr;
             }
             
-            .teacher-profile {
-                flex-direction: column;
-                text-align: center;
+            .sidebar {
+                grid-template-columns: 1fr;
             }
             
             .footer-content {
@@ -1276,27 +1264,16 @@
             }
             
             .content-section {
-                padding: 25px 20px;
+                padding: 20px;
             }
             
             .sidebar-widget {
                 padding: 20px;
             }
             
-            .logo-large img {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .logo-large::after {
-                width: 120px;
-                height: 120px;
-                top: -12px;
-            }
-            
-            .notifications-panel {
-                width: 300px;
-                left: -300px;
+            .teacher-profile {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -1306,10 +1283,10 @@
     <div class="login-screen" id="loginScreen">
         <div class="login-card">
             <div class="logo-large">
-                <img src="gohary.png" alt="الجوهري">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a5276' rx='50'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='40' fill='white'>JG</text></svg>" alt="الجوهرة">
             </div>
-            <h2>المنصة التعليمية الجوهرية</h2>
-            <p>سجل دخولك للاستفادة من المحتوى التعليمي المتميز</p>
+            <h2>المـنصة الجـوهرية</h2>
+            <p>منصة تعليمية متكاملة لطلاب المرحلة المتوسطة</p>
             
             <div class="input-group">
                 <i class="fas fa-user"></i>
@@ -1321,14 +1298,19 @@
                 <input type="password" id="password" placeholder="كلمة المرور">
             </div>
             
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="text" id="accessCode" placeholder="كود الدخول">
+            </div>
+            
             <button class="login-btn" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i>
-                تسجيل الدخول
+                دخول إلى المنصة
             </button>
             
             <div class="error-message" id="errorMessage">
                 <i class="fas fa-exclamation-triangle"></i>
-                اسم المستخدم أو كلمة المرور غير صحيحة
+                <span id="errorText">اسم المستخدم أو كلمة المرور أو كود الدخول غير صحيح</span>
             </div>
             
             <div class="purchase-code">
@@ -1343,54 +1325,47 @@
     <!-- صفحة شراء الكود -->
     <div class="purchase-page" id="purchasePage">
         <div class="purchase-container">
-            <h2>شراء كود الدخول</h2>
-            <p>اختر الباقة المناسبة لك واحصل على كود الدخول إلى المنصة التعليمية الجوهرية</p>
+            <h2><i class="fas fa-shopping-cart"></i> شراء كود الدخول</h2>
+            <p>اختر الباقة المناسبة لك واحصل على كود الدخول إلى المنصة التعليمية</p>
             
             <div class="pricing-cards">
                 <div class="pricing-card" data-price="100">
                     <h3>باقة شهرية</h3>
-                    <div class="price">300 جنيه</div>
-                    <p>وصول كامل للمنصة لمدة 30 يوم</p>
+                    <div class="price">100 ر.س</div>
+                    <p>وصول كامل لمدة 30 يوم</p>
                 </div>
                 <div class="pricing-card active" data-price="250">
-                    <h3>باقة ربع سنوية</h3>
-                    <div class="price">
-                        <span class="original-price">800 جنيه</span>
-                        500 جنيه
-                    </div>
-                    <p>وصول كامل للمنصة لمدة 3 أشهر مع شوامل</p>
+                    <h3>باقة فصلية</h3>
+                    <div class="price"><span class="original-price">300 ر.س</span> 250 ر.س</div>
+                    <p>وصول كامل لمدة 3 أشهر</p>
                 </div>
-                <div class="pricing-card" data-price="450">
+                <div class="pricing-card" data-price="400">
                     <h3>باقة سنوية</h3>
-                    <div class="price">
-                        <span class="original-price">2999 جنيه</span>
-                        1999 جنيه
-                    </div>
-                    <p>وصول كامل للمنصة لمدة عام كامل</p>
+                    <div class="price"><span class="original-price">600 ر.س</span> 400 ر.س</div>
+                    <p>وصول كامل لمدة سنة كاملة</p>
                 </div>
             </div>
             
-            <a href=":+201092937258" class="phone-link">
-                <i class="fas fa-phone"></i>
-                اقم بالتحويل علي هذا الرقم: 01092937258
+            <a href="#" class="phone-link" id="whatsappLink">
+                <i class="fab fa-whatsapp"></i> التواصل عبر واتساب
             </a>
             
             <div class="phone-input" id="phoneInput">
-                <input type="tel" placeholder="أدخل رقم الهاتف">
+                <input type="text" placeholder="أدخل رقم الهاتف">
             </div>
             
-            <button class="submit-btn" id="submitBtn">إرسال الطلب</button>
+            <button class="submit-btn" id="submitPhone">إرسال الطلب</button>
             
             <div class="success-message" id="successMessage">
                 <i class="fas fa-check-circle"></i>
                 <h3>تم استلام طلبك بنجاح!</h3>
-                <p>تم التأكد من حاله الدفع بنجاح قم بالإحتفاظ بالكود أدناه</p>
-                <div class="access-code" id="accessCode">GOHARY-2024-XXXX</div>
+                <p>سيتم التواصل معك خلال 24 ساعة لتأكيد الطلب</p>
+                <div class="access-code" id="generatedCode">JG-2023-8542</div>
+                <p>احتفظ بهذا الكود للدخول إلى المنصة</p>
             </div>
             
             <a href="#" class="back-to-login" id="backToLogin">
-                <i class="fas fa-arrow-right"></i>
-                العودة إلى تسجيل الدخول
+                <i class="fas fa-arrow-right"></i> العودة إلى شاشة الدخول
             </a>
         </div>
     </div>
@@ -1401,8 +1376,8 @@
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <img src="gohary.png" alt="الجوهري">
-                        <h1>المنصة الجوهرية</h1>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a5276' rx='50'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='40' fill='white'>JG</text></svg>" alt="الجوهرة">
+                        <h1>المـنصة الجـوهرية</h1>
                     </div>
                     
                     <div class="user-info">
@@ -1410,7 +1385,7 @@
                             <i class="fas fa-bell"></i>
                             <span class="notification-count">3</span>
                         </div>
-                        <img src="gohary.png" alt="المستخدم" id="userAvatar">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232980b9' rx='50'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='40' fill='white'>ط</text></svg>" alt="طالب" id="userAvatar">
                         <div class="user-dropdown" id="userDropdown">
                             <a href="#"><i class="fas fa-user"></i> الملف الشخصي</a>
                             <a href="#"><i class="fas fa-cog"></i> الإعدادات</a>
@@ -1436,22 +1411,23 @@
         <div class="container">
             <div class="main-content">
                 <div class="content-area">
+                    <!-- قسم الفيديوهات التعليمية -->
                     <section class="content-section active" id="videos-section">
                         <h2 class="section-title"><i class="fas fa-play-circle"></i> الفيديوهات التعليمية</h2>
                         
                         <div class="videos-grid">
                             <!-- فيديو 1 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="dQw4w9WgXcQ">
                                 <div class="video-thumbnail">
-                                    <img src="gohary.png" alt="الباب الثاني">
+                                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="الرياضيات - الجبر">
                                     <div class="video-duration">15:30</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
                                 </div>
                                 <div class="video-info">
-                                    <h3 class="video-title">الدرس الأول: أساسيات الأحياء</h3>
+                                    <h3 class="video-title">الرياضيات - شرح مفاهيم الجبر الأساسية</h3>
                                     <div class="video-meta">
-                                        <span>الباب الثاني</span>
-                                        <span>25/10/2025</span>
+                                        <span><i class="fas fa-eye"></i> 1,245 مشاهدة</span>
+                                        <span><i class="far fa-clock"></i> 2 يوم مضى</span>
                                     </div>
                                     <div class="video-progress">
                                         <div class="progress-bar" style="width: 75%"></div>
@@ -1460,17 +1436,17 @@
                             </div>
                             
                             <!-- فيديو 2 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="9bZkp7q19f0">
                                 <div class="video-thumbnail">
-                                    <img src="gohary.png" alt="الجولوجيا">
+                                    <img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg" alt="اللغة العربية - النحو">
                                     <div class="video-duration">22:15</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
                                 </div>
                                 <div class="video-info">
-                                    <h3 class="video-title">قوانين الحركة في بعدين</h3>
+                                    <h3 class="video-title">اللغة العربية - قواعد النحو للمرحلة المتوسطة</h3>
                                     <div class="video-meta">
-                                        <span>الجولوجيا</span>
-                                        <span>22/10/2025</span>
+                                        <span><i class="fas fa-eye"></i> 987 مشاهدة</span>
+                                        <span><i class="far fa-clock"></i> 5 أيام مضت</span>
                                     </div>
                                     <div class="video-progress">
                                         <div class="progress-bar" style="width: 40%"></div>
@@ -1479,17 +1455,17 @@
                             </div>
                             
                             <!-- فيديو 3 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="kJQP7kiw5Fk">
                                 <div class="video-thumbnail">
-                                    <img src=".png" alt="الباب الأول">
+                                    <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg" alt="العلوم - الفيزياء">
                                     <div class="video-duration">18:45</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
                                 </div>
                                 <div class="video-info">
-                                    <h3 class="video-title">تفاعلات الأكسدة والاختزال</h3>
+                                    <h3 class="video-title">العلوم - أساسيات الفيزياء للمبتدئين</h3>
                                     <div class="video-meta">
-                                        <span>الباب الأول</span>
-                                        <span>20/10/2025</span>
+                                        <span><i class="fas fa-eye"></i> 1,532 مشاهدة</span>
+                                        <span><i class="far fa-clock"></i> أسبوع مضى</span>
                                     </div>
                                     <div class="video-progress">
                                         <div class="progress-bar" style="width: 90%"></div>
@@ -1498,36 +1474,36 @@
                             </div>
                             
                             <!-- فيديو 4 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="L_jWHffIx5E">
                                 <div class="video-thumbnail">
-                                    <img src="gohary.png" alt="أحياء">
-                                    <div class="video-duration">27:20</div>
+                                    <img src="https://img.youtube.com/vi/L_jWHffIx5E/maxresdefault.jpg" alt="اللغة الإنجليزية">
+                                    <div class="video-duration">25:10</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
                                 </div>
                                 <div class="video-info">
-                                    <h3 class="video-title">تركيب الخلية الحيوانية</h3>
+                                    <h3 class="video-title">اللغة الإنجليزية - قواعد الزمن الماضي</h3>
                                     <div class="video-meta">
-                                        <span>أحياء</span>
-                                        <span>18/10/2025</span>
+                                        <span><i class="fas fa-eye"></i> 756 مشاهدة</span>
+                                        <span><i class="far fa-clock"></i> 3 أيام مضت</span>
                                     </div>
                                     <div class="video-progress">
-                                        <div class="progress-bar" style="width: 30%"></div>
+                                        <div class="progress-bar" style="width: 20%"></div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- فيديو 5 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="fJ9rUzIMcZQ">
                                 <div class="video-thumbnail">
-                                    <img src="gohary.png" alt="لغة عربية">
-                                    <div class="video-duration">32:10</div>
+                                    <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/maxresdefault.jpg" alt="الرياضيات - الهندسة">
+                                    <div class="video-duration">30:05</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
                                 </div>
                                 <div class="video-info">
-                                    <h3 class="video-title">تحليل النصوص الأدبية</h3>
+                                    <h3 class="video-title">الرياضيات - مفاهيم الهندسة الأساسية</h3>
                                     <div class="video-meta">
-                                        <span>لغة عربية</span>
-                                        <span>15/10/2025</span>
+                                        <span><i class="fas fa-eye"></i> 1,089 مشاهدة</span>
+                                        <span><i class="far fa-clock"></i> 4 أيام مضت</span>
                                     </div>
                                     <div class="video-progress">
                                         <div class="progress-bar" style="width: 60%"></div>
@@ -1536,445 +1512,9 @@
                             </div>
                             
                             <!-- فيديو 6 -->
-                            <div class="video-card" data-video="http://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            <div class="video-card" data-video-id="JGwWNGJdvx8">
                                 <div class="video-thumbnail">
-                                    <img src="gohary.png" alt="لغة إنجليزية">
-                                    <div class="video-duration">20:05</div>
+                                    <img src="https://img.youtube.com/vi/JGwWNGJdvx8/maxresdefault.jpg" alt="الاجتماعيات - التاريخ">
+                                    <div class="video-duration">19:20</div>
                                     <div class="play-icon"><i class="fas fa-play"></i></div>
-                                </div>
-                                <div class="video-info">
-                                    <h3 class="video-title">قواعد الزمن الماضي</h3>
-                                    <div class="video-meta">
-                                        <span>لغة إنجليزية</span>
-                                        <span>12/10/2025</span>
-                                    </div>
-                                    <div class="video-progress">
-                                        <div class="progress-bar" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <section class="content-section" id="exams-section">
-                        <h2 class="section-title"><i class="fas fa-file-alt"></i> الاختبارات</h2>
-                        <p>هنا يمكنك الاطلاع على الاختبارات السابقة وحل الاختبارات الجديدة لتقييم مستواك.</p>
-                        <!-- محتوى الاختبارات سيتم إضافته هنا -->
-                    </section>
-                    
-                    <section class="content-section" id="resources-section">
-                        <h2 class="section-title"><i class="fas fa-book"></i> المصادر التعليمية</h2>
-                        <p>هنا يمكنك تحميل الكتب والملخصات والمراجع التعليمية المساعدة.</p>
-                        <!-- محتوى المصادر التعليمية سيتم إضافته هنا -->
-                    </section>
-                    
-                    <section class="content-section" id="progress-section">
-                        <h2 class="section-title"><i class="fas fa-chart-line"></i> التقدم الدراسي</h2>
-                        <p>هنا يمكنك متابعة تقدمك في دراسة المواد المختلفة.</p>
-                        <!-- محتوى التقدم الدراسي سيتم إضافته هنا -->
-                    </section>
-                    
-                    <section class="content-section" id="support-section">
-                        <h2 class="section-title"><i class="fas fa-headset"></i> الدعم الفني</h2>
-                        <p>هنا يمكنك التواصل مع فريق الدعم الفني لحل أي مشكلة تواجهك.</p>
-                        <!-- محتوى الدعم الفني سيتم إضافته هنا -->
-                    </section>
-                </div>
-                
-                <div class="sidebar">
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-user-graduate"></i> الملف الشخصي</h3>
-                        <div class="teacher-profile">
-                            <img src="gohary.png" alt="الأستاذ الجوهري" class="teacher-img">
-                            <div class="teacher-details">
-                                <h3>الأستاذ/ محمد الجوهري</h3>
-                                <p>مدرس الباب الثاني ومؤسس المنصة</p>
-                                <p>خبرة أكثر من 15 عام في التدريس</p>
-                            </div>
-                        </div>
-                        
-                        <div class="stats">
-                            <div class="stat-card">
-                                <div class="stat-number">42</div>
-                                <div class="stat-label">فيديو تعليمي</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">18</div>
-                                <div class="stat-label">اختبار الكتروني</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">96</div>
-                                <div class="stat-label">طالب نشط</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">4.9</div>
-                                <div class="stat-label">تقييم الطلاب</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-tasks"></i> أحدث الاختبارات</h3>
-                        
-                        <div class="exam-card">
-                            <div class="exam-title">اختبار الالباب الثاني - الفصل الأول</div>
-                            <div class="exam-info">مدة الاختبار: 60 دقيقة | 25 سؤال</div>
-                        </div>
-                        
-                        <div class="exam-card">
-                            <div class="exam-title">اختبار الالجولوجيا - الوحدة الثالثة</div>
-                            <div class="exam-info">مدة الاختبار: 45 دقيقة | 20 سؤال</div>
-                        </div>
-                        
-                        <div class="exam-card">
-                            <div class="exam-title">اختبار الالباب الأول - التفاعلات</div>
-                            <div class="exam-info">مدة الاختبار: 50 دقيقة | 22 سؤال</div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-book-open"></i> أحدث المصادر</h3>
-                        
-                        <div class="resource-card">
-                            <div class="resource-title">ملخص قوانين الهندسة المستوية</div>
-                            <div class="resource-info">PDF | 2.4 MB</div>
-                        </div>
-                        
-                        <div class="resource-card">
-                            <div class="resource-title">كتيب حلول مسائل الحركة</div>
-                            <div class="resource-info">PDF | 3.1 MB</div>
-                        </div>
-                        
-                        <div class="resource-card">
-                            <div class="resource-title">مرجع سريع للجدول الدوري</div>
-                            <div class="resource-info">PDF | 1.8 MB</div>
-                        </div>
-                    </div>
-                    
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-chart-pie"></i> تقدمك الدراسي</h3>
-                        
-                        <div class="progress-section">
-                            <div class="progress-item">
-                                <div class="progress-info">
-                                    <span>الالباب الثاني</span>
-                                    <span>75%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-fill" style="width: 75%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="progress-item">
-                                <div class="progress-info">
-                                    <span>الالجولوجيا</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-fill" style="width: 60%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="progress-item">
-                                <div class="progress-info">
-                                    <span>الالباب الأول</span>
-                                    <span>45%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-fill" style="width: 45%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="progress-item">
-                                <div class="progress-info">
-                                    <span>الأحياء</span>
-                                    <span>30%</span>
-                                </div>
-                                <div class="progress-bar-container">
-                                    <div class="progress-fill" style="width: 30%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-info">
-                        <div class="footer-logo">
-                            <img src="gohary.png" alt="الجوهري">
-                            <h3>المنصة التعليمية الجوهرية</h3>
-                        </div>
-                        <p>منصة تعليمية متكاملة تقدم محتوى تعليمي متميز لطلاب المرحلة الثانوية</p>
-                        <p>جميع الحقوق محفوظة &copy; 2025</p>
-                    </div>
-                    
-                    <div class="footer-contact">
-                        <h3>تواصل معنا</h3>
-                        <p>البريد الإلكتروني: info@gohary.com</p>
-                        <p>الهاتف: 01092937258</p>
-                        
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#"><i class="fab fa-telegram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="footer-bottom">
-                    <p>تم التطوير بواسطة فريق الجوهري</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-    <!-- نافذة الفيديو -->
-    <div class="video-modal" id="videoModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">عرض الفيديو التعليمي</h3>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="video-container">
-                    <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- لوحة الإشعارات -->
-    <div class="notifications-panel" id="notificationsPanel">
-        <div class="notifications-header">
-            <h3>الإشعارات</h3>
-            <button class="close-notifications" id="closeNotifications">&times;</button>
-        </div>
-        
-        <div class="notification-item">
-            <div class="notification-icon">
-                <i class="fas fa-video"></i>
-            </div>
-            <div class="notification-content">
-                <h4>فيديو جديد متاح</h4>
-                <p>تم رفع فيديو جديد في مادة الالباب الثاني</p>
-                <div class="notification-time">منذ ساعتين</div>
-            </div>
-        </div>
-        
-        <div class="notification-item">
-            <div class="notification-icon">
-                <i class="fas fa-file-alt"></i>
-            </div>
-            <div class="notification-content">
-                <h4>اختبار جديد</h4>
-                <p>اختبار الوحدة الثالثة في الالجولوجيا متاح الآن</p>
-                <div class="notification-time">منذ 5 ساعات</div>
-            </div>
-        </div>
-        
-        <div class="notification-item">
-            <div class="notification-icon">
-                <i class="fas fa-book"></i>
-            </div>
-            <div class="notification-content">
-                <h4>مصدر جديد</h4>
-                <p>تم إضافة ملخص جديد للالباب الأول العضوية</p>
-                <div class="notification-time">منذ يوم</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- طبقة التعتيم -->
-    <div class="overlay" id="overlay"></div>
-    
-    <script>
-        // عناصر DOM الرئيسية
-        const loginScreen = document.getElementById('loginScreen');
-        const purchasePage = document.getElementById('purchasePage');
-        const platform = document.getElementById('platform');
-        const loginBtn = document.getElementById('loginBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const purchaseLink = document.getElementById('purchaseLink');
-        const backToLogin = document.getElementById('backToLogin');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const userAvatar = document.getElementById('userAvatar');
-        const userDropdown = document.getElementById('userDropdown');
-        const notificationBell = document.getElementById('notificationBell');
-        const notificationsPanel = document.getElementById('notificationsPanel');
-        const closeNotifications = document.getElementById('closeNotifications');
-        const overlay = document.getElementById('overlay');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const contentSections = document.querySelectorAll('.content-section');
-        const videoCards = document.querySelectorAll('.video-card');
-        const videoModal = document.getElementById('videoModal');
-        const closeModal = document.getElementById('closeModal');
-        const videoFrame = document.getElementById('videoFrame');
-        const pricingCards = document.querySelectorAll('.pricing-card');
-        const phoneInput = document.getElementById('phoneInput');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const accessCode = document.getElementById('accessCode');
-        
-        // بيانات الدخول (لأغراض العرض فقط)
-        const validUsername = "سيف فكري";
-        const validPassword = "#FFHUDT6O3jrw0E9NPo7eM";
-        
-        // تسجيل الدخول
-        loginBtn.addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === validUsername && password === validPassword) {
-                loginScreen.style.display = 'none';
-                platform.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'block';
-                setTimeout(() => {
-                    errorMessage.style.display = 'none';
-                }, 3000);
-            }
-        });
-        
-        // الانتقال إلى صفحة الشراء
-        purchaseLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            loginScreen.style.display = 'none';
-            purchasePage.style.display = 'block';
-        });
-        
-        // العودة إلى تسجيل الدخول
-        backToLogin.addEventListener('click', function(e) {
-            e.preventDefault();
-            purchasePage.style.display = 'none';
-            loginScreen.style.display = 'block';
-        });
-        
-        // تسجيل الخروج
-        logoutBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            platform.style.display = 'none';
-            loginScreen.style.display = 'block';
-        });
-        
-        // إظهار/إخفاء قائمة المستخدم
-        userAvatar.addEventListener('click', function() {
-            userDropdown.classList.toggle('active');
-        });
-        
-        // إغلاق قائمة المستخدم عند النقر خارجها
-        document.addEventListener('click', function(e) {
-            if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
-                userDropdown.classList.remove('active');
-            }
-        });
-        
-        // إظهار/إخفاء الإشعارات
-        notificationBell.addEventListener('click', function() {
-            notificationsPanel.classList.add('active');
-            overlay.classList.add('active');
-        });
-        
-        // إغلاق الإشعارات
-        closeNotifications.addEventListener('click', function() {
-            notificationsPanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        // إغلاق الإشعارات بالنقر على الطبقة المعتمة
-        overlay.addEventListener('click', function() {
-            notificationsPanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        // التنقل بين أقسام المنصة
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // إزالة النشاط من جميع الروابط
-                navLinks.forEach(l => l.classList.remove('active'));
-                
-                // إضافة النشاط للرابط المختار
-                this.classList.add('active');
-                
-                // إخفاء جميع الأقسام
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // إظهار القسم المختار
-                const sectionId = this.getAttribute('data-section');
-                document.getElementById(sectionId).classList.add('active');
-            });
-        });
-        
-        // فتح الفيديو في نافذة مشغّل
-        videoCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const videoUrl = this.getAttribute('data-video');
-                videoFrame.src = videoUrl;
-                videoModal.style.display = 'flex';
-            });
-        });
-        
-        // إغلاق نافذة الفيديو
-        closeModal.addEventListener('click', function() {
-            videoModal.style.display = 'none';
-            videoFrame.src = '';
-        });
-        
-        // إغلاق نافذة الفيديو بالنقر خارجها
-        videoModal.addEventListener('click', function(e) {
-            if (e.target === videoModal) {
-                videoModal.style.display = 'none';
-                videoFrame.src = '';
-            }
-        });
-        
-        // اختيار باقة الشراء
-        pricingCards.forEach(card => {
-            card.addEventListener('click', function() {
-                pricingCards.forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                
-                const price = this.getAttribute('data-price');
-                phoneInput.style.display = 'block';
-                submitBtn.style.display = 'block';
-            });
-        });
-        
-        // إرسال طلب الشراء
-        submitBtn.addEventListener('click', function() {
-            successMessage.style.display = 'block';
-            phoneInput.style.display = 'none';
-            submitBtn.style.display = 'none';
-            
-            // توليد كود وهمي
-            const code = 'GOHARY-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
-            accessCode.textContent = code;
-        });
-        
-        // إضافة تأثيرات عند التمرير
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
-            }
-        });
-        
-        // تحميل المحتوى بشكل تدريجي (لتحسين الأداء)
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 500);
-        });
-    </script>
-</body>
-</html>
+     
